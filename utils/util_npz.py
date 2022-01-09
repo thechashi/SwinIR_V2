@@ -82,5 +82,4 @@ def get_abs_max(input_path, verbose=False):
         
         
 if __name__ == "__main__":
-    pass
-    #resize_all('../testsets/slices/raw',  '../testsets/slices')
+    resize_all('../testsets/slices/raw',  '../testsets/slices')
