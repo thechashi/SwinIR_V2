@@ -4,15 +4,58 @@ import cv2
 import matplotlib.pyplot as plt
 import math
 def transform(image, resize_size):
-        resize_image = cv2.resize(image, resize_size, interpolation=cv2.INTER_CUBIC)
-        return np.array(resize_image) 
+    """
+    Bicubic resize
+
+    Parameters
+    ----------
+    image : np.array
+        image to be resized.
+    resize_size : tuple
+        new size.
+
+    Returns
+    -------
+    np.array
+        resized image.
+
+    """
+    resize_image = cv2.resize(image, resize_size, interpolation=cv2.INTER_CUBIC)
+    return np.array(resize_image) 
 
 def get_npz(file_name):
+    """
+    Loads an image from a npz file
+
+    Parameters
+    ----------
+    file_name : str
+        file to be loaded.
+
+    Returns
+    -------
+    image : np.array
+        image from npz file.
+
+    """
     image = np.load(file_name)
     image = image.f.arr_0
     return image
 
 def view_npz(file_name):
+    """
+    Visualize an npz file
+
+    Parameters
+    ----------
+    file_name : str
+        file path.
+
+    Returns
+    -------
+    None.
+
+    """
     image = np.load(file_name)
     image = image.f.arr_0
     plt.ion()
@@ -20,6 +63,19 @@ def view_npz(file_name):
     plt.imshow(image)
     
 def summary_2D_npz(file_name):
+    """
+    Summarize an npz file
+
+    Parameters
+    ----------
+    file_name : str
+        file path.
+
+    Returns
+    -------
+    None.
+
+    """
     image = np.load(file_name)
     image = image.f.arr_0
     shape, dtype, min_, max_, mean, std = image.shape, image.dtype, image.min(), image.max(), np.mean(image), np.std(image)
@@ -31,11 +87,41 @@ def summary_2D_npz(file_name):
     print('Mean: ', mean)  
     
 def npz_to_png(input_path, output_path):
+    """
+    Npz to png conversion
+
+    Parameters
+    ----------
+    input_path : str
+        input path.
+    output_path : str
+        ouptut path.
+
+    Returns
+    -------
+    None.
+
+    """
     image = np.load(input_path)
     image = image.f.arr_0
     cv2.imwrite(output_path, image.reshape((image.shape[0], image.shape[1], 1)))
     
 def resize_all(input_path, output_path):
+    """
+    Resize all npz files into HR, /2, /3, /4, and /8 sizes 
+
+    Parameters
+    ----------
+    input_path : str
+        input directory.
+    output_path : str
+        output directory.
+
+    Returns
+    -------
+    None.
+
+    """
     folders = ['/HR', '/LR_bicubic/X2', '/LR_bicubic/X3', '/LR_bicubic/X4', '/LR_bicubic/X8']
     for folder in folders:
         if not os.path.exists(output_path + folder):
@@ -65,6 +151,22 @@ def resize_all(input_path, output_path):
             idx += 1
             
 def get_abs_max(input_path, verbose=False):
+    """
+    Get absolute max pixel value of a npz dataset
+
+    Parameters
+    ----------
+    input_path : str
+        input directory.
+    verbose : bool, optional
+        Prints fileby file details. The default is False.
+
+    Returns
+    -------
+    dataset_max : float
+        abs max pixel value of the dataset.
+
+    """
     dataset_max = -math.inf
     for filename in os.listdir(input_path):
         if '.npz' in filename:
