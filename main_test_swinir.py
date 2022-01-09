@@ -85,7 +85,7 @@ def main():
 
         # evaluate psnr/ssim/psnr_b
         if img_gt is not None:
-            img_gt = (img_gt * 255.0).round().astype(np.uint8)  # float32 to uint8
+            img_gt = (img_gt*0.33*args.abs_max).astype(np.float32)  # float32 to uint8
             img_gt = img_gt[:h_old * args.scale, :w_old * args.scale, ...]  # crop gt
             img_gt = np.squeeze(img_gt)
 

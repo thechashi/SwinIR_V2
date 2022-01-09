@@ -222,13 +222,14 @@ def main(json_path='options/train_msrresnet_psnr.json'):
 
                     visuals = model.current_visuals()
                     E_img = util.tensor2uint(visuals['E'])
+                    E_img = E_img[0]
                     H_img = util.tensor2uint(visuals['H'])
 
                     # -----------------------
                     # save estimated image E
                     # -----------------------
-                    save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
-                    util.imsave(E_img, save_img_path)
+                    #save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
+                    #util.imsave(E_img, save_img_path)
 
                     # -----------------------
                     # calculate PSNR

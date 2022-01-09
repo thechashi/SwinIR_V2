@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import utils.util_npz as unpz
-
+import toml
 '''
 # --------------------------------------------
 # Kai Zhang (github: https://github.com/cszn)
@@ -253,8 +253,9 @@ def read_img(path):
 
 
 def uint2single(img):
-
-    return np.float32(img/255.)
+    config = toml.load('config.toml')
+    
+    return np.float32(img/(0.33*config['abs_max']))
 
 
 def single2uint(img):
@@ -293,10 +294,11 @@ def uint2tensor3(img):
 
 # convert 2/3/4-dimensional torch tensor to uint
 def tensor2uint(img):
-    img = img.data.squeeze().float().clamp_(0, 1).cpu().numpy()
+    img = img.data.squeeze().float().clamp_(-3., 3.).cpu().numpy()
     if img.ndim == 3:
         img = np.transpose(img, (1, 2, 0))
-    return np.uint8((img*255.0).round())
+    config = toml.load('config.toml')
+    return np.float32((img*0.33*config['abs_max']))
 
 
 # --------------------------------------------
