@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "swinir"
+version = "0.1.0"
+description = ""
+authors = ["chashi-mahiul-islam-bd <ci20l@my.fsu.edu>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+opencv-python = "^4.5.5"
+torch = "^1.10.1"
+requests = "^2.27.1"
+timm = "^0.4.12"
+matplotlib = "^3.5.1"
+
+[tool.poetry.dev-dependencies]
+spyder = "^5.2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
