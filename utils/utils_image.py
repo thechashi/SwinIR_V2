@@ -10,7 +10,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-import util_npz as unpz
+import utils.util_npz as unpz
 
 '''
 # --------------------------------------------
