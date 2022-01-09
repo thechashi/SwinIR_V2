@@ -63,7 +63,6 @@ def main():
         imgname, img_lq, img_gt = get_image_pair(args, path)  # image to HWC-BGR, float32
         img_lq = np.transpose(img_lq if img_lq.shape[2] == 1 else img_lq[:, :, [2, 1, 0]], (2, 0, 1))  # HCW-BGR to CHW-RGB
         img_lq = torch.from_numpy(img_lq).float().unsqueeze(0).to(device)  # CHW-RGB to NCHW-RGB
-        print(img_lq.shape)
         # inference
         with torch.no_grad():
             # pad input image to be a multiple of window_size
@@ -77,7 +76,6 @@ def main():
 
         # save image
         output = output.data.squeeze().float().cpu().clamp_(0, 1).numpy()
-        print(output.shape)
         if output.ndim == 3:
             #output = np.transpose(output[[2, 1, 0], :, :], (1, 2, 0))  # CHW-RGB to HCW-BGR
             output = output[0]
