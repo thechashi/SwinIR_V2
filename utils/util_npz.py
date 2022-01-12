@@ -184,4 +184,5 @@ def get_abs_max(input_path, verbose=False):
         
         
 if __name__ == "__main__":
-    resize_all('../testsets/slices/raw',  '../testsets/slices')
+    #resize_all('../testsets/slices/raw',  '../testsets/slices')
+    print(get_abs_max('../trainsets/earth1_ds/HR'))

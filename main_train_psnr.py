@@ -164,7 +164,7 @@ def main(json_path='options/train_msrresnet_psnr.json'):
     # ----------------------------------------
     '''
 
-    for epoch in range(1000000):  # keep running
+    for epoch in range(20000):  # keep running
         for i, train_data in enumerate(train_loader):
 
             current_step += 1
@@ -222,9 +222,12 @@ def main(json_path='options/train_msrresnet_psnr.json'):
 
                     visuals = model.current_visuals()
                     E_img = util.tensor2uint(visuals['E'])
-                    E_img = E_img[0]
                     H_img = util.tensor2uint(visuals['H'])
-
+                    print(E_img.shape)
+                    print(H_img.shape)
+                    print(E_img.max(), E_img.min())
+                    print(H_img.max(), H_img.min())
+                    print()
                     # -----------------------
                     # save estimated image E
                     # -----------------------

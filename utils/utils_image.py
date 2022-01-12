@@ -191,7 +191,7 @@ def imread_uint(path, n_channels=3):
     # output: HxWx3(RGB or GGG), or HxWx1 (G)
     if n_channels == 1:
         img = unpz.get_npz(path)
-        img= img.reshape((img.shape[0], img.shape[1], 1))
+        img= img.reshape((img.shape[1], img.shape[0], 1))
         #img = cv2.imread(path, 0)  # cv2.IMREAD_GRAYSCALE
         #img = np.expand_dims(img, axis=2)  # HxWx1
     elif n_channels == 3:

@@ -1,6 +1,5 @@
 import numpy as np
 import torch
-import experimentsrpatch.utilities as ut
 
 def create_custom_npz(input_file, output_file, height, width):
     image = np.load(input_file)
@@ -9,13 +8,14 @@ def create_custom_npz(input_file, output_file, height, width):
     np.savez(output_file, image)
 
 if __name__ == "__main__":
-    create_custom_npz("0.npz", "13.npz", 120, 120)
+    #create_custom_npz("0.npz", "13.npz", 120, 120)
     for i in range(11):
         name = str(i) + ".npz"
-        image = ut.npz_loader(name)
-        c, h, w = image.shape
+        image = np.load(name)
+        image = image.f.arr_0
+        h, w = image.shape
         print("Name: ", name)
-        print("C, H, W: ", c, h , w)
+        print(" H, W: ", h , w)
 # =============================================================================
 #     image = np.load("0.npz")
 #     #print(type(image.f.arr_0.dtype))
