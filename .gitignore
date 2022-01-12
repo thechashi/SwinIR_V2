@@ -2,3 +2,8 @@ model_zoo/
 testsets/slices/HR/
 testsets/slices/LR_bicubic/
 .spyproject/
+*.pyc
+superresolution/
+trainsets/earth1_ds/
+*.save
+*.swp
