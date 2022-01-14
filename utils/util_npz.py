@@ -106,6 +106,15 @@ def npz_to_png(input_path, output_path):
     image = image.f.arr_0
     cv2.imwrite(output_path, image.reshape((image.shape[0], image.shape[1], 1)))
     
+def all_npz_to_png(input_path, output_path):
+    for filename in os.listdir(input_path):
+        if '.npz' in filename:
+            file_path = os.path.join(input_path, filename)
+            output_img_path = os.path.join(output_path, filename.split('.')[0] + '.png')
+            image = np.load(file_path)
+            image = image.f.arr_0
+            cv2.imwrite(output_img_path, image.reshape((image.shape[0], image.shape[1], 1)))
+            
 def resize_all(input_path, output_path):
     """
     Resize all npz files into HR, /2, /3, /4, and /8 sizes 
@@ -185,4 +194,6 @@ def get_abs_max(input_path, verbose=False):
         
 if __name__ == "__main__":
     #resize_all('../testsets/slices/raw',  '../testsets/slices')
-    print(get_abs_max('../trainsets/earth1_ds/HR'))
+    #print(get_abs_max('../trainsets/earth1_ds/HR'))
+    all_npz_to_png('../testsets/slices/HR', '../testsets/slices/HR')
+    pass
