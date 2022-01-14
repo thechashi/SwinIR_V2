@@ -232,8 +232,8 @@ def main(json_path='options/train_msrresnet_psnr.json'):
                     # -----------------------
                     # save estimated image E
                     # -----------------------
-                    #save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
-                    #util.imsave(E_img, save_img_path)
+                    save_img_path = os.path.join(img_dir, '{:s}_{:d}.png'.format(img_name, current_step))
+                    util.imsave(E_img, save_img_path)
 
                     # -----------------------
                     # calculate PSNR
@@ -242,7 +242,7 @@ def main(json_path='options/train_msrresnet_psnr.json'):
 
                     current_ssim = util.calculate_ssim(E_img, H_img, border=border)
                     logger.info('{:->4d}--> {:>10s} | {:<4.2f}dB'.format(idx, image_name_ext, current_psnr))
-                    logger.info('{:->4d}--> {:>10s} | {:<4.2f}dB'.format(idx, image_name_ext, current_ssim))
+                    logger.info('{:->4d}--> {:>10s} | {:<4.2f}'.format(idx, image_name_ext, current_ssim))
 
                     avg_psnr += current_psnr
                     avg_ssim += current_ssim
@@ -251,7 +251,7 @@ def main(json_path='options/train_msrresnet_psnr.json'):
                 avg_ssim = avg_ssim / idx
 
                 # testing log
-                logger.info('<epoch:{:3d}, iter:{:8,d}, Average PSNR : {:<.2f}dB, Average SSIM : {:<.2f}dB\n'.format(epoch, current_step, avg_psnr, avg_ssim))
+                logger.info('<epoch:{:3d}, iter:{:8,d}, Average PSNR : {:<.2f}dB, Average SSIM : {:<.2f}\n'.format(epoch, current_step, avg_psnr, avg_ssim))
 
 if __name__ == '__main__':
     main()
