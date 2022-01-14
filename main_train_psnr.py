@@ -240,7 +240,7 @@ def main(json_path='options/train_msrresnet_psnr.json'):
                     # -----------------------
                     current_psnr = util.calculate_psnr(E_img, H_img, border=border)
 
-                    current_ssim = util.calculate_ssim(E_img, H_img, crop_border=border)
+                    current_ssim = util.calculate_ssim(E_img, H_img, border=border)
                     logger.info('{:->4d}--> {:>10s} | {:<4.2f}dB'.format(idx, image_name_ext, current_psnr))
                     logger.info('{:->4d}--> {:>10s} | {:<4.2f}dB'.format(idx, image_name_ext, current_ssim))
 
