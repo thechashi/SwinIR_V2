@@ -195,5 +195,5 @@ def get_abs_max(input_path, verbose=False):
 if __name__ == "__main__":
     #resize_all('../testsets/slices/raw',  '../testsets/slices')
     #print(get_abs_max('../trainsets/earth1_ds/HR'))
-    all_npz_to_png('../testsets/slices/HR', '../testsets/slices/HR')
+    all_npz_to_png('../testsets/slices/LR_bicubic/X4', '../testsets/slices/LR_bicubic/X4')
     pass
