@@ -195,7 +195,13 @@ def imread_uint(path, n_channels=3):
         #img = cv2.imread(path, 0)  # cv2.IMREAD_GRAYSCALE
         #img = np.expand_dims(img, axis=2)  # HxWx1
     elif n_channels == 3:
-        img = cv2.imread(path, cv2.IMREAD_UNCHANGED)  # BGR or G
+        img = unpz.get_npz(path)
+        img2 = np.zeros( ( np.array(img).shape[0], np.array(img).shape[1], 3 ) )
+        img2[:,:,0] = img # same value in each channel
+        img2[:,:,1] = img
+        img2[:,:,2] = img
+        img = img2
+        #img = cv2.imread(path, cv2.IMREAD_UNCHANGED)  # BGR or G
         if img.ndim == 2:
             img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)  # GGG
         else:
