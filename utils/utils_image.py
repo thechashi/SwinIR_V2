@@ -12,6 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import utils.util_npz as unpz
 import toml
+import toml
 '''
 # --------------------------------------------
 # Kai Zhang (github: https://github.com/cszn)
@@ -650,7 +651,10 @@ def calculate_psnr(img1, img2, border=0):
     mse = np.mean((img1 - img2)**2)
     if mse == 0:
         return float('inf')
-    return 20 * math.log10(255.0 / math.sqrt(mse))
+    config = toml.load('config.toml')
+    # return 20 * math.log10(255./ math.sqrt(mse))
+    return 20 * math.log10(0.33 * config['abs_max']/ math.sqrt(mse))
+
 
 
 # --------------------------------------------
@@ -684,8 +688,13 @@ def calculate_ssim(img1, img2, border=0):
 
 
 def ssim(img1, img2):
-    C1 = (0.01 * 255)**2
-    C2 = (0.03 * 255)**2
+    config = toml.load('config.toml')
+# =============================================================================
+#     C1 = (0.01 * 255.)**2
+#     C2 = (0.03 * 255.)**2
+# =============================================================================
+    C1 = (0.01 * 0.33 * config['abs_max'])**2
+    C2 = (0.03 * 0.33 * config['abs_max'])**2
 
     img1 = img1.astype(np.float64)
     img2 = img2.astype(np.float64)
