@@ -651,7 +651,7 @@ def calculate_psnr(img1, img2, border=0):
     mse = np.mean((img1 - img2)**2)
     if mse == 0:
         return float('inf')
-    config = toml.load('../config.toml')
+    config = toml.load('config.toml')
     # return 20 * math.log10(255./ math.sqrt(mse))
     return 20 * math.log10(0.33 * config['abs_max']/ math.sqrt(mse))
 
@@ -688,7 +688,7 @@ def calculate_ssim(img1, img2, border=0):
 
 
 def ssim(img1, img2):
-    config = toml.load('../config.toml')
+    config = toml.load('config.toml')
 # =============================================================================
 #     C1 = (0.01 * 255.)**2
 #     C2 = (0.03 * 255.)**2
